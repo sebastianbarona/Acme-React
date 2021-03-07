@@ -49,25 +49,14 @@ const TablaUsuarios = () => {
           </thead>
           <tbody>
 
-          {
-        equipo.length > 0 ?    
-        equipo.map(usuario => (
-          <tr key={usuario.pk}>
-            <td>{usuario.Username}</td>
-            <td>{usuario.Email}</td>
-            <td>{usuario.Nombres}</td>
-            <td>{usuario.Apellidos}</td>
-            <td>{usuario.Fecha}</td>
-            <td>{usuario.Rol_usuario}</td>
-          </tr>
-              )):(
-              <tr>
-                <td colSpan={3}>No Users</td>
-              </tr>
-
-              )
-          }
-          </tbody>
+          <tr >
+            <td>usuario.Username</td>
+            <td>usuario.Email</td>
+            <td>usuario.Nombres</td>
+            <td>usuario.Apellidos</td>
+            <td>usuario.Fecha</td>
+            <td>usuario.Rol_usuario</td>
+          </tr> </tbody>
           </table>
       </div>
     </div>

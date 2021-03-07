@@ -27,18 +27,14 @@ const ModCliente = () => {
     <div className="row justify-content-center">
         <div className="mt75 row justify-content-center">                                      
             <div className="grid-item branding col-sm-3 col-md-3 col-lg-3">
-            {
-                       equipo.length > 0 ?    
-                        equipo.map(persona => (
-                        <div key={persona.pk}>
 
                 <div className="card ">
                     <div className="card-body">    
-                        <h5 className="card-title"><strong>{persona.Cedula} </strong></h5>
-                        <p className="card-text"><strong>{persona.Nombres} </strong></p>
-                        <p className="card-text"><strong>Apellidos: </strong><strong >{persona.Apellidos} </strong> </p>
-                        <p className="card-text"><strong>Telefono: </strong><strong >{persona.Telefono} </strong></p>
-                        <p className="card-text"><strong>Fecha: </strong> <strong >{persona.Fecha} </strong></p>
+                        <h5 className="card-title"><strong>persona.Cedula </strong></h5>
+                        <p className="card-text"><strong>persona.Nombres </strong></p>
+                        <p className="card-text"><strong>Apellidos: </strong><strong >persona.Apellidos </strong> </p>
+                        <p className="card-text"><strong>Telefono: </strong><strong >persona.Telefono </strong></p>
+                        <p className="card-text"><strong>Fecha: </strong> <strong >persona.Fecha </strong></p>
                         <center>
                             <button type="submit" className="btn btn-primary " data-toggle="modal" data-target="#exampleModal" >Edit</button>
                             <br></br>
@@ -49,17 +45,6 @@ const ModCliente = () => {
                     </div>
                     <EditCliente/>
                 </div>
-
-                </div>
-
-                )):(
-                <div >
-                <center>  
-                <label colSpan={3}>No Hay Clientes</label>
-                </center>
-                </div>
-                    )
-                    }
 
                 <br></br>                            
             </div>

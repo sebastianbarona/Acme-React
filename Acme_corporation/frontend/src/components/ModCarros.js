@@ -29,19 +29,15 @@ const ModCarros = () => {
         <div className="mt75 row justify-content-center">
             <div className="grid-item branding col-sm-3 col-md-3 col-lg-3"> 
                 <div className="card ">
-                {
-                       equipo.length > 0 ?    
-                        equipo.map(carro => (
-                        <div key={carro.pk}>
 
-                    <img className="card-img-top" src="{carro.Imagen}"></img>
+                    <img className="card-img-top" src="https://i.pinimg.com/564x/b3/a4/c1/b3a4c17c3d200b5318745fdb6b04e38e.jpg"></img>
                     <div className="card-body">    
-                        <h5 className="card-title"><strong>{carro.Marca}</strong></h5>
-                        <p className="card-text"><strong>Placa</strong><strong>{carro.Placa} </strong></p>
-                        <p className="card-text"><strong>Dueño :</strong><strong >{carro.Dueño} </strong></p>
-                        <p className="card-text"><strong>Fecha Publicacion :</strong> <strong >{carro.Fecha_Publicacion} </strong></p>
-                        <p className="card-text"><strong>Estado :</strong><strong >{carro.Estado} </strong> </p>
-                        <p className="card-text"><strong>Precio :</strong><strong >{carro.Precio} </strong> </p>
+                        <h5 className="card-title"><strong>carro.Marca</strong></h5>
+                        <p className="card-text"><strong>Placa</strong><strong>carro.Placa </strong></p>
+                        <p className="card-text"><strong>Dueño :</strong><strong >carro.Dueño </strong></p>
+                        <p className="card-text"><strong>Fecha Publicacion :</strong> <strong >carro.Fecha_Publicacion </strong></p>
+                        <p className="card-text"><strong>Estado :</strong><strong >carro.Estado </strong> </p>
+                        <p className="card-text"><strong>Precio :</strong><strong >carro.Precio </strong> </p>
                         <center>
                         <button type="submit" className="btn btn-primary " data-toggle="modal" data-target="#exampleModal" >Edit</button>
                         <br></br>
@@ -51,17 +47,6 @@ const ModCarros = () => {
                         </center>
                     </div>
                      <EditCarro/>
-                     </div>
-
-                    )):(
-                    <div >
-                    <center>  
-                        <label colSpan={3}>No Hay Carros</label>
-                    </center>
-                    </div>
-                        )
-                        }
-
                 </div>
             </div>
         </div>

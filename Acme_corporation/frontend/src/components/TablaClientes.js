@@ -52,23 +52,13 @@ const Tabla = () => {
           </thead>
           
   <tbody>
-
-          {
-          equipo.length > 0 ?    
-          equipo.map(persona => (
-          <tr key={persona.Cedula}>
-          <td>{persona.Nombres}</td>
-          <td>{persona.Apellidos}</td>
-          <td>{persona.Cedula}</td> 
-          <td>{persona.Telefono}</td>
-          <td>{persona.Fecha}</td>
+  <tr >
+          <td>persona.Nombres</td>
+          <td>persona.Apellidos</td>
+          <td>persona.Cedula</td> 
+          <td>persona.Telefono</td>
+          <td>persona.Fecha</td>
           </tr>
-          )):(
-          <tr>
-            <td colSpan={3}>No Hay Clientes</td>
-          </tr>
-            )
-          }
 </tbody>
 
 </table>

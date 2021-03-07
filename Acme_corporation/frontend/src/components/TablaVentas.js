@@ -49,22 +49,17 @@ const TablaVentas = () => {
          
           <tbody>
 
-          {
-          equipo.length > 0 ?    
-          equipo.map(venta => (
-          <tr key={venta.pk}>
-          <td>{venta.Placa}</td>
-          <td>{venta.Vendedor}</td>
-          <td>{venta.Comprador}</td>
-          <td>{venta.Fecha}</td>
-          <td>{venta.Precio}</td>
+
+          <tr >
+          <td>venta.Placa</td>
+          <td>venta.Vendedor</td>
+          <td>venta.Comprador</td>
+          <td>venta.Fecha</td>
+          <td>venta.Precio</td>
+          <td></td>
+          <td></td>
+            
           </tr>
-                )):(
-          <tr>
-              <td colSpan={3}>No Ventas</td>
-          </tr>
-              )
-              }
 </tbody>
 </table>
       </div>
