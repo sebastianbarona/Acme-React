@@ -22,7 +22,7 @@ const ModCarros = () => {
 <div className="col-md-6 col-7 content_section">
     <div> 
         <h3> Modificar Carro </h3>
-        <p> Bienvenido a Cacharrerias Don Andres recuerde llenar muy bien los campos antes de Modificar un Carro </p>
+        <p> Bienvenido a Acme Corporation recuerde llenar muy bien los campos antes de Modificar un Carro </p>
         <br></br>
     </div>
     <div className="row justify-content-center">

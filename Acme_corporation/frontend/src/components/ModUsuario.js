@@ -22,7 +22,7 @@ const ModUsuario = () => {
 <div className="col-md-6 col-7 content_section"> 
     <div> 
         <h3> Modificar Usuario </h3>
-        <p> Bienvenido a Cacharrerias Don Andres recuerde llenar muy bien los campos antes de Modificar un Usuario </p>
+        <p> Bienvenido a Acme Corporation recuerde llenar muy bien los campos antes de Modificar un Usuario </p>
         <br></br>
     </div>
     <div className="row justify-content-center">
