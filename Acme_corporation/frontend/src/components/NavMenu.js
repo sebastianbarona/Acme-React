@@ -11,7 +11,7 @@ const NavMenu = () => {
             <div className="animation-container animation-fade-left" data-animation-delay="0">     
                 <div className="cc-profile-image">
                     <a href="#">
-                        <img src="https://scontent.fclo1-1.fna.fbcdn.net/v/t1.0-9/158102831_3920299611353864_862414796055326428_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeGOx_qq8SrJLOI9tI_CnjledFfctoOb3Mh0V9y2g5vcyD-7xtiVA_FzE6U5dODHM9_3CQMj9CPDOx5qLHT7EUQp&_nc_ohc=HZ05t2Phm7sAX8elNiu&_nc_ht=scontent.fclo1-1.fna&oh=a5e0477345bdba13e95574d3f451e3cc&oe=606A4333" alt="Image" />
+                        <img src="https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" alt="Image" />
                     </a>
                 </div>      
             </div>
