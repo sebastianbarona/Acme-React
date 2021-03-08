@@ -1,6 +1,6 @@
 Juan Sebastian Barona - 201759903
-Cristian lozano -
-Daniel barrera -
+Cristian lozano -1760029-2711
+Daniel barrera -1759668-2711
 
 Path /Home
 path /Login
