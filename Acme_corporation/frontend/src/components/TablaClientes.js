@@ -1,23 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+
+const baseUrl = 'http://127.0.0.1:8000/personas/'
 
 
 const Tabla = () => {
 
-  const [equipo,setEquipo] = React.useState([])
+  const [data, setData]=useState([]);
 
-  React.useEffect(() => {
-    obtenerDatos()
-          },[])
-  
-  const obtenerDatos = async() =>{
-    const data = await fetch('http://127.0.0.1:8000/personas')
-    const personas = await data.json()
-    setEquipo(personas.data)
-  
+  const peticionGet=async()=>{
+    await axios.get (baseUrl)
+    .then(response=>{
+      setData(response.data);
+    })
   }
-  
-  console.log(equipo)
-  
+
+  React.useEffect(async()=>{
+    await peticionGet();
+  },[])
+
   
   return ( 
 
@@ -52,13 +53,18 @@ const Tabla = () => {
           </thead>
           
   <tbody>
-  <tr >
-          <td>persona.Nombres</td>
-          <td>persona.Apellidos</td>
-          <td>persona.Cedula</td> 
-          <td>persona.Telefono</td>
-          <td>persona.Fecha</td>
+
+  {data.map(persona => (
+
+  <tr key={persona.Cedula} >
+          <td>{ persona.Nombres }</td>
+          <td>{ persona.Apellidos }</td>
+          <td>{ persona.Cedula }</td> 
+          <td>{ persona.Telefono }</td>
+          <td>{ persona.Fecha }</td>
           </tr>
+      ))}
+
 </tbody>
 
 </table>

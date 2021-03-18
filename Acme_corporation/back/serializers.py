@@ -48,18 +48,18 @@ class UsuariosSerializer(serializers.ModelSerializer):
 class PersonasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Personas
-        fields = ('pk','Nombres','Apellidos','Cedula','Telefono','Fecha')
+        fields = ('Nombres','Apellidos','Cedula','Telefono','Fecha')
 
 class MarcasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Marcas
-        fields = ('pk','Id_Marca','Nombre','Imagen','Fecha')
+        fields = ('Id_Marca','Nombre','Imagen','Fecha')
 
 class CarrosSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Carros
-        fields = ('pk','Marca','Placa',
+        fields = ('Marca','Placa',
                 'Dueño','Fechapublicacion','Precio',
                 'Imagen','Estado_Carro','Estado')
 
@@ -67,17 +67,17 @@ class VentaSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Venta
-        fields = ('pk','Id_venta','Placa','Marca','Vendedor','Comprador','Fecha','Precio')
+        fields = ('Id_venta','Placa','Marca','Vendedor','Comprador','Fecha','Precio')
 
 class CompraSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Compra
-        fields = ('pk','Id_compra','Placa','Marca','Vendedor','Comprador','Fecha','Precio')
+        fields = ('Id_compra','Placa','Marca','Vendedor','Comprador','Fecha','Precio')
 
 class IntermediarioSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Intermediario
-        fields = ('pk','Id_intermediario','Intermediario','Placa','Marca','Comprador','Dueño','Fecha','Precio')
+        fields = ('Id_intermediario','Intermediario','Placa','Marca','Comprador','Dueño','Fecha','Precio')
 

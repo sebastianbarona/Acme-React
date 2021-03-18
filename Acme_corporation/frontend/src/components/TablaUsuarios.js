@@ -1,23 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
+const baseUrl = 'http://127.0.0.1:8000/usuarios/'
 
 const TablaUsuarios = () => {
   
-  const [equipo,setEquipo] = React.useState([])
+  const [data, setData]=useState([]);
 
-  React.useEffect(() => {
-    obtenerDatos()
-          },[])
-  
-  const obtenerDatos = async() =>{
-    const data = await fetch('http://127.0.0.1:8000/usuarios')
-    const usuarios = await data.json()
-    setEquipo(usuarios.data)
-
+  const peticionGet=async()=>{
+    await axios.get (baseUrl)
+    .then(response=>{
+      setData(response.data);
+    })
   }
 
-  console.log(equipo)
-   
+  React.useEffect(async()=>{
+    await peticionGet();
+  },[])
+
+     
   return ( 
   
   <div className="col-lg-10 col-md-9 col-12 body_block  align-content-center">
@@ -43,20 +44,28 @@ const TablaUsuarios = () => {
           <th scope="col">Nombres</th>
           <th scope="col">Apellidos</th>
           <th scope="col">Fecha</th>
-          <th scope="col">Rol</th>
+          <th scope="col">Rol</th>  
           
        </tr>
           </thead>
           <tbody>
 
-          <tr >
-            <td>usuario.Username</td>
-            <td>usuario.Email</td>
-            <td>usuario.Nombres</td>
-            <td>usuario.Apellidos</td>
-            <td>usuario.Fecha</td>
-            <td>usuario.Rol_usuario</td>
-          </tr> </tbody>
+        {data.map(usuario => (
+
+          <tr key={ usuario.pk }>
+            <td>{ usuario.Username }</td>
+            <td>{ usuario.Email }</td>
+            <td>{ usuario.Nombres }</td>
+            <td>{ usuario.Apellidos }</td>
+            <td>{ usuario.Fecha }</td>
+            <td>{ usuario.Rol_usuario }</td>
+            <td></td>
+            <td></td>
+          </tr> 
+          
+          ))}
+
+          </tbody>
           </table>
       </div>
     </div>

@@ -29,19 +29,24 @@ const ModUsuario = () => {
         <div className="mt75 row justify-content-center">                                      
             <div className="grid-item branding col-sm-3 col-md-3 col-lg-3">
                 
+
+            {
+                equipo.length > 0 ?    
+                equipo.map(usuario => (
+    
                 <div className="card ">
                     <div className="card-body">    
-                        <img className="card-img-top" src="https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg"></img>
+                        <img className="card-img-top" src={usuario.Imagen_Perfil}></img>
                         <br></br>
                         <br></br>
                         <center>
-                        <h3 className="card-title"><strong>usuario.Username </strong></h3>
+                        <h3 className="card-title"><strong>{ usuario.Username }</strong></h3>
                         </center>
-                        <p className="card-text"><strong>usuario.Email </strong></p>
-                        <p className="card-text"><strong>usuario.Nombres </strong></p>
-                        <p className="card-text"><strong>Apellidos: </strong><strong >usuario.Apellidos </strong> </p>
-                        <p className="card-text"><strong>Rol_usuario </strong><strong>usuario.Rol_usuario </strong></p>
-                        <p className="card-text"><strong>Fecha: </strong> <strong>usuario.Fecha </strong></p>
+                        <p className="card-text"><strong>{ usuario.Email }</strong></p>
+                        <p className="card-text"><strong>{ usuario.Nombres }</strong></p>
+                        <p className="card-text"><strong>Apellidos: </strong><strong >{ usuario.Apellidos }</strong> </p>
+                        <p className="card-text"><strong>Rol_usuario </strong><strong>{ usuario.Rol_usuario }</strong></p>
+                        <p className="card-text"><strong>Fecha: </strong> <strong>{ usuario.Fecha }</strong></p>
                         <center>
                             <button type="submit" className="btn btn-primary " data-toggle="modal" data-target="#exampleModal" >Edit</button>
                             <br></br>
@@ -53,7 +58,15 @@ const ModUsuario = () => {
                     </div>
                     <EditUsuario/>
                     </div>
-              
+
+                     ) ):(
+                        <div >
+                        <center>  
+                            <label colSpan={3}>No Hay Usuarios</label>
+                        </center>
+                        </div>
+             )}
+          
         </div>
             <br></br>                            
         </div>

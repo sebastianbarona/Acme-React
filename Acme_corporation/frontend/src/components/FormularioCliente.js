@@ -1,29 +1,34 @@
 import React, {Fragment, useState} from 'react';
+import axios from 'axios';
+
+const baseUrl = 'http://127.0.0.1:8000/personas/'
 
 const Formulario = () => {
-   
-  const [datos, setDatos] = useState({
 
-      Nombres: '',
-      Apellidos: '',
-      Cedula: '',
-      Telefono: '',
-      Fecha: ''
+  const [data, setData]=useState([]);
+  const [persona, setPersonaSeleccionada]=useState({
+    Nombres: '',
+    Apellidos: '',
+    Cedula: '',
+    Telefono: '',
+    Fecha: ''
 
-  }) 
-  
-  const listener = (event) => {
-     setDatos({
-       ...datos,
-       [event.target.name] : event.target.value
-     })
+  })
+
+  const handleChange=e=>{
+    const {name, value}=e.target;
+    setPersonaSeleccionada(prevState=>({
+      ...prevState,
+      [name]: value
+    }))
+    console.log(persona);
   }
 
-  const enviarDatos = (event) => {
-
-    event.preventDefault();
-    console.log(datos.Nombres+' '+datos.Apellidos+' '+datos.Cedula+' '+datos.Telefono+' '+datos.Fecha)
-
+  const peticionPost=async()=>{
+    await axios.post(baseUrl, persona)
+    .then(response=>{
+      setData(data.concat(response.data))
+    })
   }
 
   return (
@@ -39,26 +44,26 @@ const Formulario = () => {
         <br></br>
         <br></br>       
         <h1>Agregar Cliente</h1>
-        <form className = "row"  onSubmit={enviarDatos} >'csrf_token'
+        <form className = "row"  >
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Nombres</span>
-            <input type="text" className="form-control" onChange={listener} placeholder="Nombres" name="Nombres" aria-label="Nombres" aria-describedby="basic-addon1"></input>
+            <input type="text" className="form-control" onChange={handleChange} placeholder="Nombres" name="Nombres" aria-label="Nombres" aria-describedby="basic-addon1"></input>
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Apellidos</span>
-            <input type="text" className="form-control" onChange={listener} placeholder="Apellidos" name="Apellidos" aria-label="Apellidos" aria-describedby="basic-addon1"></input>
+            <input type="text" className="form-control" onChange={handleChange} placeholder="Apellidos" name="Apellidos" aria-label="Apellidos" aria-describedby="basic-addon1"></input>
           </div>
           <div className="input-group mb-3">
-            <input type="text" className="form-control" onChange={listener} placeholder="Cedula" name="Cedula" aria-label="Cedula"></input>
+            <input type="text" className="form-control" onChange={handleChange} placeholder="Cedula" name="Cedula" aria-label="Cedula"></input>
             <span className="input-group-text">#</span>
-            <input type="tel" className="form-control" onChange={listener} placeholder="Telefono" name="Telefono" aria-label="Telefono"></input>
+            <input type="tel" className="form-control" onChange={handleChange} placeholder="Telefono" name="Telefono" aria-label="Telefono"></input>
           </div>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">Fecha</span>
-            <input type="date" className="form-control" onChange={listener} name="Fecha" placeholder="Fecha" aria-label="Fecha"></input>
+            <input type="date" className="form-control" onChange={handleChange} name="Fecha" placeholder="Fecha" aria-label="Fecha"></input>
           </div>
           <div className="input-group mb-3">
-            <button type="submit" className="btn btn-primary">Guardar</button>
+            <button type="submit" className="btn btn-primary" onClick={()=>peticionPost()}>Guardar</button>
           </div>
         </form>
       </div>  

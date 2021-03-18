@@ -10,7 +10,7 @@ const ModCompra = () => {
             },[])
     
     const obtenerDatos = async() =>{
-      const data = await fetch('http://127.0.0.1:8000/intermediarios')
+      const data = await fetch('http://127.0.0.1:8000/compras')
       const compra = await data.json()
       setEquipo(compra.data)
   
@@ -28,7 +28,7 @@ const ModCompra = () => {
         <div className="mt75 row justify-content-center">                                      
             <div className="grid-item branding col-sm-3 col-md-3 col-lg-3"> 
             {
-                       equipo.length > 0 ?    
+                        equipo.length > 0 ?    
                         equipo.map(compra => (
                         <div key={compra.pk}>
 
@@ -42,7 +42,7 @@ const ModCompra = () => {
                         <p className="card-text"><strong>Precio :</strong> <strong >{compra.Precio} </strong></p>
                         <center>
 
-                            <button type="submit" className="btn btn-primary " data-toggle="modal" data-target="#exampleModal" >Edit</button>
+                            <button type="submit" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Edit</button>
                             <br></br>
                             <form action="/eliminarcarro/{{i.pk}}" >
                                 <button type="submit" className="btn btn-primary" >Eliminar</button>

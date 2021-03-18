@@ -15,7 +15,6 @@ from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle, TA_CENTER
 from reportlab.lib.units import inch, mm
 from django.views.generic import View,TemplateView,ListView,DeleteView,UpdateView,CreateView
-from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -63,7 +62,7 @@ class UsuariosView(APIView):
             if data.has_previous():
                 previousPage = data.previous_page_number()
                 
-            return Response({'data': serializer.data , 'count': paginator.count})
+            return Response( serializer.data )
 
         # POST - Crea un nuevo Usuario 
     def post(self, request):
@@ -139,7 +138,7 @@ class PersonasView(APIView):
             if data.has_previous():
                 previousPage = data.previous_page_number()
                 
-            return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages, 'nextlink': '/personas/?page=' + str(nextPage), 'prevlink': '/personas/?page=' + str(previousPage)})
+            return Response( serializer.data )
 
 # POST - Crea un nuevo cliente 
     def post(self, request):
@@ -153,9 +152,9 @@ class PersonasView(APIView):
 
 class PersonasDetail(APIView):
 #GET - Saber de un cliente en especifico
-    def get(self,request, pk):
+    def get(self,request, Cedula):
         try:
-            persona = Personas.objects.get(pk=pk)
+            persona = Personas.objects.get(Cedula=Cedula)
         except Personas.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -164,9 +163,9 @@ class PersonasDetail(APIView):
             return Response(serializer.data)
 
 #PUT - Edita un cliente
-    def put(self,request,pk):
+    def put(self,request,Cedula):
         try:
-            persona = Personas.objects.get(pk=pk)
+            persona = Personas.objects.get(Cedula=Cedula)
         except Personas.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -178,9 +177,9 @@ class PersonasDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #DELETE - Elimina un cliente
-    def delete(self,request,pk): 
+    def delete(self,request,Cedula): 
         try:
-            persona = Personas.objects.get(pk=pk)
+            persona = Personas.objects.get(Cedula=Cedula)
         except Personas.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -211,7 +210,7 @@ class CarrosView(APIView):
             if data.has_previous():
                 previousPage = data.previous_page_number()
                 
-            return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages})
+            return Response(serializer.data)
 
 # POST - Crea un nuevo producto    
     def post(self, request):
@@ -285,7 +284,7 @@ class VentasView(APIView):
             if data.has_previous():
                 previousPage = data.previous_page_number()
                 
-            return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages, 'nextlink': '/ventas/?page=' + str(nextPage), 'prevlink': '/ventas/?page=' + str(previousPage)})
+            return Response(serializer.data )
 
 # POST - Crea un nueva venta    
     def post(self, request):
@@ -362,7 +361,7 @@ class ComprasView(APIView):
             if data.has_previous():
                 previousPage = data.previous_page_number()
                 
-            return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages, 'nextlink': '/compras/?page=' + str(nextPage), 'prevlink': '/compras/?page=' + str(previousPage)})
+            return Response( serializer.data )
 
 # POST - Crea una nueva Compra    
     def post(self, request):
@@ -437,7 +436,7 @@ class IntermediarioView(APIView):
             if data.has_previous():
                 previousPage = data.previous_page_number()
                 
-            return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages, 'nextlink': '/intermediarios/?page=' + str(nextPage), 'prevlink': '/intermediarios/?page=' + str(previousPage)})
+            return Response(serializer.data)
 
 # POST - Crea un nuevo Intermediario
     def post(self, request):

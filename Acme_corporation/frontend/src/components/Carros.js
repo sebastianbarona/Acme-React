@@ -2,6 +2,22 @@ import React from 'react';
 
 
 const Carros = () => {
+
+  const [equipo,setEquipo] = React.useState([])
+
+  React.useEffect(() => {
+    obtenerDatos()
+          },[])
+  
+  const obtenerDatos = async() =>{
+    const data = await fetch('http://127.0.0.1:8000/carros')
+    const carros = await data.json()
+    setEquipo(carros.data)
+
+    console.log(carros.data)
+
+  }
+
     return ( 
 
 
@@ -29,19 +45,24 @@ const Carros = () => {
 
       </div>
       
+      {
+                equipo.length > 0 ?    
+                equipo.map(carro => (
+
+
       <div className="portfolio gutters grid img-container">
             <div className="grid-item branding col-sm-12 col-md-6 col-lg-3">
                 <div className="grid-sizer col-sm-12 col-md-6 col-lg-3"></div>
-                <a href="https://i.pinimg.com/564x/b3/a4/c1/b3a4c17c3d200b5318745fdb6b04e38e.jpg" title="<strong style=color:coral> Precio: {{i.Precio}} $ </strong><br><br><strong style=color:coral>Placa: </strong> 
-                    {{i.Placa}} <br><br><strong style=color:coral> Dueño: </strong> {{i.Dueño}}<br><br><strong style=color:coral> Fecha Publicacion: </strong>
-                    {{i.Fechapublicacion}}<br><br><strong style=color:coral> Estado Carro: </strong> {{i.Estado_Carro}}<br><br><strong style=color:coral> Estado: </strong> {{i.Estado}}">
+                <a href={carro.Imagen} title="<strong style=color:coral> Precio: {carro.Precio} $ </strong><br><br><strong style=color:coral>Placa: </strong> 
+                    {{carro.Placa}} <br><br><strong style=color:coral> Dueño: </strong> {{carro.Dueño}}<br><br><strong style=color:coral> Fecha Publicacion: </strong>
+                    {{carro.Fechapublicacion}}<br><br><strong style=color:coral> Estado Carro: </strong> {{carro.Estado_Carro}}<br><br><strong style=color:coral> Estado: </strong> {{carro.Estado}}">
                     <div className="project_box_one">
-                      <img src="https://i.pinimg.com/564x/b3/a4/c1/b3a4c17c3d200b5318745fdb6b04e38e.jpg"  alt="pro1"/>
+                      <img src={carro.Imagen}  alt="pro1"/>
                         <div className="product_info">
                             <div className="product_info_text">
                                 <div className="product_info_text_inner">
                                     <i className="ion ion-plus"></i>
-                                    <h3>Marca</h3>
+                                    <h3>{carro.Marca.Nombre}</h3>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +70,14 @@ const Carros = () => {
                 </a>
             </div>
         </div>
-
+                  )):(
+                    <div >
+                    <center>  
+                        <label colSpan={3}>No Hay Carros</label>
+                    </center>
+                    </div>
+                        )
+        }
 
     </div>
   </div>

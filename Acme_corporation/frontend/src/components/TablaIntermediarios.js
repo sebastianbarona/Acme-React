@@ -50,14 +50,17 @@ const Tablaintermediarios = () => {
 
   <tbody>
 
-          <tr>
-          <td>intermediario.Intermediario</td>
-          <td>intermediario.Placa</td>
-          <td>intermediario.Comprador</td>
-          <td>intermediario.Dueño</td>
-          <td>intermediario.Fecha</td>
-          <td>intermediario.Precio</td>
+  {equipo.map(intermediario => (
+          <tr key={ intermediario.pk }>
+          <td>{ intermediario.Intermediario }</td>
+          <td>{ intermediario.Placa }</td>
+          <td>{ intermediario.Comprador }</td>
+          <td>{ intermediario.Dueño }</td>
+          <td>{ intermediario.Fecha }</td>
+          <td>{ intermediario.Precio }</td>
           </tr>
+
+))}
 </tbody>
 </table>
       </div>

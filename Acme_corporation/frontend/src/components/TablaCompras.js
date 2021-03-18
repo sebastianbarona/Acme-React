@@ -49,16 +49,21 @@ const TablaCompras = () => {
           </thead>
           <tbody>
 
-          <tr >
-            <td>compra.Placa</td>
-            <td>compra.Marca</td>
-            <td>compra.Vendedor</td> 
-            <td>compra.Comprador</td>
-            <td>compra.Fecha</td>
-            <td>compra.Precio</td>
+          {equipo.map(compra => (
+
+          <tr key={ compra.pk }>
+            <td>{ compra.Placa }</td>
+            <td>{ compra.Marca }</td>
+            <td>{ compra.Vendedor }</td> 
+            <td>{ compra.Comprador }</td>
+            <td>{ compra.Fecha }</td>
+            <td>{ compra.Precio }</td>
             <td></td>
             
-            </tr></tbody>
+            </tr>
+                   ))}
+         
+            </tbody>
 </table>
       </div>
     </div>

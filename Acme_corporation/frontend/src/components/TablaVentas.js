@@ -49,17 +49,20 @@ const TablaVentas = () => {
          
           <tbody>
 
+          {equipo.map(venta => (
 
-          <tr >
-          <td>venta.Placa</td>
-          <td>venta.Vendedor</td>
-          <td>venta.Comprador</td>
-          <td>venta.Fecha</td>
-          <td>venta.Precio</td>
+          <tr key={ venta.pk }>
+          <td>{ venta.Placa }</td>
+          <td>{ venta.Vendedor }</td>
+          <td>{ venta.Comprador }</td>
+          <td>{ venta.Fecha }</td>
+          <td>{ venta.Precio }</td>
           <td></td>
           <td></td>
             
           </tr>
+                ))}
+
 </tbody>
 </table>
       </div>

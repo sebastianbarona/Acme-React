@@ -18,7 +18,6 @@ const ModVenta = () => {
   
     console.log(equipo)
   
-
     return ( 
 
 <div className="col-md-6 col-7 content_section">
