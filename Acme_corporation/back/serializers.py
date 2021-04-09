@@ -17,13 +17,14 @@ class UsuariosSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Usuarios
-        fields = ('pk','Username','Email','Nombres','Apellidos','Imagen_Perfil','Password','Password2','Usuario_activo','Rol_usuario','Fecha')
+        fields = ('Username','Email','Nombres','Apellidos','Imagen_Perfil','Password','Password2','Usuario_activo','Rol_usuario','Fecha')
         extra_kwargs = {
             'Nombres': {'required': True},
             'Rol_usuario': {'required': True}
         }
 
-    def validate(self, attes):
+    def validate(self, attrs):
+
         if attrs['Password'] != attrs['Password2']:
             raise serializers.ValidationError({"Password": "Passwords no coinciden."})
         return attrs
@@ -36,6 +37,8 @@ class UsuariosSerializer(serializers.ModelSerializer):
             Nombres = validated_data['Nombres'],
             Apellidos = validated_data['Apellidos'],
             Imagen_Perfil = validated_data['Imagen_Perfil'],
+            Password = validated_data['Password'],
+            Password2 = validated_data['Password2'],
             Usuario_activo = validated_data['Usuario_activo'],
             Rol_usuario = validated_data['Rol_usuario'],
             Fecha = validated_data['Fecha']
@@ -59,7 +62,7 @@ class CarrosSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Carros
-        fields = ('Marca','Placa',
+        fields = ('Marca','Placa','Modelo',
                 'Dueño','Fechapublicacion','Precio',
                 'Imagen','Estado_Carro','Estado')
 
@@ -67,17 +70,17 @@ class VentaSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Venta
-        fields = ('Id_venta','Placa','Marca','Vendedor','Comprador','Fecha','Precio')
+        fields = ('Id_venta','Placa','Vendedor','Comprador','Fecha','Precio')
 
 class CompraSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Compra
-        fields = ('Id_compra','Placa','Marca','Vendedor','Comprador','Fecha','Precio')
+        fields = ('Id_compra','Placa','Vendedor','Comprador','Fecha','Precio')
 
 class IntermediarioSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Intermediario
-        fields = ('Id_intermediario','Intermediario','Placa','Marca','Comprador','Dueño','Fecha','Precio')
+        fields = ('Id_intermediario','Intermediario','Placa','Comprador','Dueno','Fecha','Precio')
 

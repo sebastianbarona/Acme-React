@@ -17,13 +17,11 @@
 /* ----------------Text Fonts ------------------- */
 body {
   font-size: 20px;
-  line-height: 1.6;
+  line-height: 1.95;
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
-  color: #343a40;
   font-style: normal;
   overflow-x: hidden;
-  display: flex;
 }
 
 h1,h4, h6 {
@@ -996,11 +994,10 @@ img {
 .container .info span .fa {
   color: #EF3B3A;
 }
-body {
+.body2 {
   background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url("./components/BGLog.jpg");
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
   justify-content: center;
-
 }

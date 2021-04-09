@@ -1,35 +1,78 @@
 import React, {Fragment, useState} from 'react';
+import axios from 'axios';
+
+const baseUrl = 'http://127.0.0.1:8000/carros/'
+const basedosUrl = 'http://127.0.0.1:8000/marcas/'
+const basetresUrl = 'http://127.0.0.1:8000/personas/'
 
 const FormularioCarro = () => {
    
-  const [datos, setDatos] = useState({
+  const [data, setData]=useState([]);
+  const [datados, setData2]=useState([]);
+  const [datatres, setData3]=useState([]);
+  const [carros, setCarroSeleccionado] = useState({
 
-      Marca: '',
+      Marca: parseInt(''),
       Modelo: '',
       Placa: '',
       Dueño: '',
       Fechapublicacion: '',
-      Precio:'',
+      Precio: parseInt(''),
       Imagen:'',
       Estado_Carro:'',
       Estado:''
 
   }) 
-  
-  const listener = (event) => {
-     setDatos({
-       ...datos,
-       [event.target.name] : event.target.value
-     })
+
+  const handleChange=e=>{
+    const {name, value}=e.target;
+    setCarroSeleccionado(prevState=>({
+      ...prevState,
+      [name]: value
+    }))
   }
 
-  const enviarDatos = (event) => {
+  const peticionGet =async()=>{
+    await axios.get (basedosUrl)
+    .then(response=>{
+        setData(response.data.data);
+    })
+  }
 
-    event.preventDefault();
-    console.log(datos.Marca+' '+datos.Modelo+' '+datos.Placa+' '+datos.Dueño+' '+datos.Fechapublicacion
-    +' '+datos.Precio+' '+datos.Imagen+' '+datos.Estado_Carro+' '+datos.Estado                    
-    )
+  const peticionGetmarcas =async()=>{
+    await axios.get (basedosUrl)
+    .then(response=>{
+        setData2(response.data.data);
+    })
+  }
 
+  const peticionGetpersonas=async()=>{
+    await axios.get (basetresUrl)
+    .then(response=>{
+        setData3(response.data.data);
+    })
+  }
+
+  console.log(carros);
+
+  React.useEffect(async()=>{
+    await peticionGetmarcas();
+  },[])
+
+  React.useEffect(async()=>{
+    await peticionGet();
+  },[])
+
+  React.useEffect(async()=>{
+    await peticionGetpersonas();
+  },[])
+
+  const peticionPost=async()=>{
+    await axios.post(baseUrl, carros)
+    .then(response=>{
+      setData(data.concat(response.data))
+      alert("Carro Creado")
+    })
   }
 
   return (
@@ -41,53 +84,56 @@ const FormularioCarro = () => {
               <div className="grid-item branding  col-lg-5">
                 <br></br>
                 <h1>Agregar Carro</h1>
-                <form className = "row"  onSubmit={enviarDatos} >'csrf_token'
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
                             <label className="input-group-text" for="inputGroupSelect01">Marca</label>
-                        </div>
-                        <select className="custom-select" onChange={listener} name="Marca" id="inputGroupSelect01">
-                            <option selected>Marca...</option>
-                            <option value="1">Marca1</option>
+                        </div>            
+                        <select className="custom-select" onChange={handleChange} name="Marca">
+                        <option></option> 
+                            {datados.map(elemento=>(
+                        <option key={elemento.Id_Marca} value={elemento.Id_Marca}>{elemento.Nombre}</option> 
+                            ))}
                         </select>
                     </div>
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">Modelo</span>
-                        <input type="text" className="form-control" onChange={listener} placeholder="Modelo" name="Modelo" aria-label="Modelo" aria-describedby="basic-addon1"></input>
+                        <input type="text" className="form-control" onChange={handleChange} placeholder="Modelo" name="Modelo" ></input>
                     </div>
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">Placa</span>
-                        <input type="text" className="form-control" onChange={listener} placeholder="Placa" name="Placa" aria-label="Placa" aria-describedby="basic-addon1"></input>
+                        <input type="text" className="form-control" onChange={handleChange} placeholder="Placa" name="Placa" ></input>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" for="inputGroupSelect01">Dueño</label>
+                            <label className="input-group-text" >Dueño</label>
                         </div>
-                        <select className="custom-select" onChange={listener} name="Dueño" id="inputGroupSelect01">
-                            <option selected>Dueño...</option>
-                            <option value="1">Persona1</option>
+                        <select className="custom-select" onChange={handleChange} name="Dueño" >
+                        <option></option>
+                        {datatres.map(elemento=>(
+                               <option key={elemento.Cedula} value={elemento.Cedula}>{elemento.Nombres}</option> 
+                            ))}
                         </select>
                     </div>
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">Fecha Publicacion</span>
-                        <input type="date" className="form-control" onChange={listener} name="Fechapublicacion" placeholder="Fechapublicacion" aria-label="Fecha"></input>
+                        <input type="date" className="form-control" onChange={handleChange} name="Fechapublicacion" placeholder="Fechapublicacion" ></input>
                     </div>
                     <div className="input-group mb-3">
                         <span className="input-group-text" id="basic-addon1">Precio</span>
-                        <input type="number" className="form-control" onChange={listener} name="Precio" placeholder="Precio" aria-label="Precio"></input>
+                        <input type="number" className="form-control" onChange={handleChange} name="Precio" placeholder="Precio" ></input>
                     </div>
                     <label for="basic-url" className="text-light" >Imagen Carro URL</label>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon3">https://example/users/imagen_Carro</span>
+                            <span className="input-group-text" >https://example/users/imagen_Carro</span>
                         </div>
-                        <input type="text" className="form-control" onChange={listener} name="Imagen" id="basic-url" aria-describedby="basic-addon3"></input>
+                        <input type="text" className="form-control" onChange={handleChange} name="Imagen" id="basic-url" ></input>
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" for="inputGroupSelect01">Estado Carro</label>
+                            <label className="input-group-text" >Estado Carro</label>
                         </div>
-                        <select className="custom-select" onChange={listener} name="Estado_Carro" id="inputGroupSelect01">
+                        <select className="custom-select" onChange={handleChange}  name="Estado_Carro" >
                             <option selected>Estado Carro...</option>
                             <option value="Nuevo">Nuevo</option>
                             <option value="Usado">Usado</option>
@@ -95,18 +141,18 @@ const FormularioCarro = () => {
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <label className="input-group-text" for="inputGroupSelect01">Estado</label>
+                            <label className="input-group-text">Estado</label>
                         </div>
-                        <select className="custom-select" onChange={listener} name="Estado" id="inputGroupSelect01">
+                        <select className="custom-select" onChange={handleChange}  name="Estado" >
                             <option selected>Estado...</option>
                             <option value="Disponible">Disponible</option>
                             <option value="Vendido">Vendido</option>
                         </select>
                     </div>
                     <div className="input-group mb-3">
-                        <button type="submit" className="btn btn-primary">Guardar</button>
+                        <button type="submit" className="btn btn-primary" onClick={()=>peticionPost()}>Guardar</button>
                     </div>
-                </form>
+
             </div>  
         </div>
     </div>

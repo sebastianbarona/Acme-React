@@ -1,19 +1,36 @@
 import {NavLink} from 'react-router-dom';
+import React, {useState} from 'react';
+import axios from 'axios';
 import{FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import{faCar,faUserFriends,faUser,faHome,faShoppingCart,faMoneyCheck,faBook} from '@fortawesome/free-solid-svg-icons'
 
+const baseUrl = 'http://127.0.0.1:8000/usuarios/'
+
 const NavMenu = () => {
-    return ( 
-              
-        <div className="side_menu_section animation-container animation-fade-down" data-animation-delay="300">      
+
+    const [data, setData]=useState([]);
+
+    const peticionGet=async()=>{
+      await axios.get (baseUrl)
+      .then(response=>{
+        setData(response.data.data);
+      })
+    }
   
+    React.useEffect(async()=>{
+      await peticionGet();
+    },[])
+
+    return ( 
+
+<div className="side_menu_section animation-container animation-fade-down" data-animation-delay="300">        
   <center>
-            <div className="animation-container animation-fade-left" data-animation-delay="0">     
-                <div className="cc-profile-image">
-                    <a href="#">
-                        <img src="https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" alt="Image" />
-                    </a>
-                </div>      
+    <div className="animation-container animation-fade-left" data-animation-delay="0">     
+        <div className="cc-profile-image">
+            <a href="#">
+                <img src="https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" alt="Image" />
+            </a>
+        </div>      
             </div>
             <h3>Username</h3>
         </center>

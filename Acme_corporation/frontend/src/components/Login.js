@@ -1,12 +1,30 @@
-import React from "react";
+import React, {useState} from 'react';
+import axios from 'axios';
+
+const baseUrl = 'http://127.0.0.1:8000/usuarios/'
 
 const Login = () => {
+
+    const [data, setData]=useState([]);
+
+    const peticionGet=async()=>{
+      await axios.get (baseUrl)
+      .then(response=>{
+        setData(response.data.data);
+      })
+    }
+  
+    React.useEffect(async()=>{
+      await peticionGet();
+    },[])
+
     return ( 
+
+<body className="body2">
 <div className="login-page justify-content-center">
         <br></br>
         <br></br>
         <br></br>
-           
         <div className="form">
              <h3>Log in</h3>
                 <form action="/Home">
@@ -28,6 +46,7 @@ const Login = () => {
 </div>
        </div>
  
+       </body>
      );
 }
  

@@ -11,7 +11,8 @@ const Tabla = () => {
   const peticionGet=async()=>{
     await axios.get (baseUrl)
     .then(response=>{
-      setData(response.data);
+      setData(response.data.data);
+      console.log(setData)
     })
   }
 
@@ -30,16 +31,14 @@ const Tabla = () => {
         <form action="/Agregar_persona" >
            <button type="submit" className="btn btn-primary">Agregar</button>
            </form>
-           <label>"                    "</label>
+
            <form action="/ModPersona">
            <button type="submit" className="btn btn-primary">Modificar</button>
            </form>
      
           </div>
-
-
       </div>
-      
+    
         <div className="table-responsive">  
           <table className="table table-hover text-light">
           <thead>

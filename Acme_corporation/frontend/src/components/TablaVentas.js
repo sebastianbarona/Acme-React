@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+
+const baseUrl = 'http://127.0.0.1:8000/ventas/'
 
 const TablaVentas = () => {
 
-  const [equipo,setEquipo] = React.useState([])
 
-  React.useEffect(() => {
-    obtenerDatos()
-          },[])
-  
-  const obtenerDatos = async() =>{
-    const data = await fetch('http://127.0.0.1:8000/ventas')
-    const ventas = await data.json()
-    setEquipo(ventas.data)
+  const [data, setData]=useState([]);
 
+  const peticionGet=async()=>{
+    await axios.get (baseUrl)
+    .then(response=>{
+      setData(response.data.data);
+    })
   }
 
-  console.log(equipo)
+  React.useEffect(async()=>{
+    await peticionGet();
+  },[])
+
 
 
   return ( 
@@ -27,7 +30,7 @@ const TablaVentas = () => {
             <form action="/Agregar_ventas" >
                 <button type="submit" className="btn btn-primary">Agregar</button>
             </form>
-            <label>"                    "</label>
+
             <form action="/ModVenta" >
                 <button type="submit" className="btn btn-primary">Modificar</button>
             </form>
@@ -38,7 +41,7 @@ const TablaVentas = () => {
           <table className="table table-hover text-light">
           <thead>
           <tr>
-          <th scope="col">Id_venta</th>
+          <th scope="col">Codigo de venta</th>
           <th scope="col">Placa</th>
           <th scope="col">Vendedor</th>
           <th scope="col">Comprador</th>
@@ -49,15 +52,16 @@ const TablaVentas = () => {
          
           <tbody>
 
-          {equipo.map(venta => (
+          {data.map(venta => (
 
-          <tr key={ venta.pk }>
+          <tr key={ venta.Id_venta }>
+         
+          <td>{venta.Id_venta}</td> 
           <td>{ venta.Placa }</td>
           <td>{ venta.Vendedor }</td>
           <td>{ venta.Comprador }</td>
           <td>{ venta.Fecha }</td>
           <td>{ venta.Precio }</td>
-          <td></td>
           <td></td>
             
           </tr>

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {makeStyles} from '@material-ui/core/styles';
 import {Modal, Button, TextField} from '@material-ui/core';
-import {Edit, Delete, DateRange, DateRangeOutlined} from '@material-ui/icons';
+import {Delete} from '@material-ui/icons';
 
 
 const baseUrl = 'http://127.0.0.1:8000/personas/'
@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
       width: '100%'
     }
   }));
-  
+
+
 
 const ModCliente = () => {
     const styles= useStyles();
@@ -56,7 +57,7 @@ const ModCliente = () => {
     const peticionGet=async()=>{
       await axios.get (baseUrl)
       .then(response=>{
-        setData(response.data);
+        setData(response.data.data);
       })
     }
 
@@ -73,6 +74,7 @@ const ModCliente = () => {
             }
           })
           setData(dataNueva);
+          alert("Usuario Actualizado")
           abrirCerrarModalEditar();
         })
       }
@@ -114,7 +116,7 @@ const ModCliente = () => {
           <br />
           <TextField name="Telefono" className={styles.inputMaterial} label="Telefono" onChange={handleChange} value={persona.Telefono}/>
           <br />
-          <TextField name="Fecha" className={styles.inputMaterial} label="Fecha" onChange={handleChange} value={persona.Fecha}/>
+          <TextField type="date" name="Fecha" className={styles.inputMaterial} label="Fecha" onChange={handleChange} value={persona.Fecha}/>
           <br /><br />
           <div align="right">
             <Button color="primary" onClick={()=>peticionPut()}>Editar</Button>

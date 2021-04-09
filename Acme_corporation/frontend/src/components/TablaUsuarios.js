@@ -10,7 +10,7 @@ const TablaUsuarios = () => {
   const peticionGet=async()=>{
     await axios.get (baseUrl)
     .then(response=>{
-      setData(response.data);
+      setData(response.data.data);
     })
   }
 
@@ -28,7 +28,7 @@ const TablaUsuarios = () => {
           <form action="/Agregar_usuarios" method="GET">
            <button type="submit" className="btn btn-primary">Agregar</button>
            </form>
-           <label>"                    "</label>
+
            <form action="/ModUsuario" method="GET">
            <button type="submit" className="btn btn-primary">Modificar</button>
            </form>

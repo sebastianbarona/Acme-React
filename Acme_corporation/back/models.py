@@ -2,8 +2,6 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-from django.contrib.auth.models import User
-
 from django.utils import timezone
 # Create your models here.
 
@@ -13,7 +11,7 @@ class Usuarios(models.Model):
 
     Status=((('Administrador','Admin')),(('Empleado','Empleado')))
 
-    Username = models.CharField(max_length = 50,unique = True)
+    Username = models.CharField(max_length = 50,primary_key=True)
     Email = models.EmailField(max_length = 254,unique = True)
     Nombres = models.CharField(max_length = 200,blank = True,null = True)
     Apellidos = models.CharField(max_length = 200,blank = True,null = True)
@@ -91,14 +89,14 @@ class Carros(models.Model):
         ordering = ["Marca"]
 
     def __str__(self):
-        return "{0}  {1}".format(self.Placa,self.Marca)
+        return   self.Placa
 
 #_____________________________________________________________________________________________
 #Venta
 class Venta(models.Model):
 
     Id_venta = models.AutoField(primary_key = True)
-    Placa = models.ForeignKey(Carros,on_delete = models.CASCADE)
+    Placa = models.ForeignKey(Carros,unique = True , on_delete = models.CASCADE)
     Vendedor = models.ForeignKey(Usuarios,on_delete = models.CASCADE)
     Comprador = models.ForeignKey(Personas,on_delete = models.CASCADE)
     Fecha = models.DateField(default = timezone.now)
@@ -109,33 +107,33 @@ class Venta(models.Model):
         ordering = ["Fecha"]
 
     def __str__(self):
-        return self.Id_venta
+        return str(self.Id_venta)
 
 #_____________________________________________________________________________________________
 #Compras
 class Compra(models.Model):
 
     Id_compra = models.AutoField(primary_key = True)
-    Placa = models.ForeignKey(Carros,on_delete = models.CASCADE)
+    Placa = models.ForeignKey(Carros, unique = True ,on_delete = models.CASCADE)
     Vendedor = models.ForeignKey(Personas,on_delete = models.CASCADE)
     Comprador = models.ForeignKey(Usuarios,on_delete = models.CASCADE)
     Fecha = models.DateField(default = timezone.now)
     Precio = models.IntegerField()
     
-
     #Metada
     class Meta:
         ordering = ["Fecha"]
 
     def __str__(self):
-        return self.Id_compra
+        return  str(self.Id_compra)
 
 class Intermediario(models.Model):
     
     Id_intermediario = models.AutoField(primary_key= True)
     Intermediario = models.ForeignKey(Usuarios,on_delete = models.CASCADE)
-    Placa = models.ForeignKey(Carros,on_delete = models.CASCADE)
+    Placa = models.ForeignKey(Carros,unique = True,on_delete = models.CASCADE)
     Comprador = models.ForeignKey(Personas,on_delete = models.CASCADE)
+    Dueno = models.CharField(default=Personas,max_length=200,db_column="Dueño")
     Fecha = models.DateField(default = timezone.now)
     Precio = models.IntegerField()
     
@@ -143,4 +141,4 @@ class Intermediario(models.Model):
         ordering = ["Fecha"]
 
     def __str__(self):
-        return self.Id_intermediario
+        return str(self.Id_intermediario)

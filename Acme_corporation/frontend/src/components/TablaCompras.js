@@ -1,24 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
+const baseUrl = 'http://127.0.0.1:8000/compras/'
 
 const TablaCompras = () => {
 
-  const [equipo,setEquipo] = React.useState([])
+  const [data, setData]=useState([]);
 
-  React.useEffect(() => {
-    obtenerDatos()
-          },[])
-  
-  const obtenerDatos = async() =>{
-    const data = await fetch('http://127.0.0.1:8000/compras')
-    const compras = await data.json()
-    setEquipo(compras.data)
-  
+  const peticionGet=async()=>{
+    await axios.get (baseUrl)
+    .then(response=>{
+      setData(response.data.data);
+    })
   }
-  
-  console.log(equipo)
 
-    return ( 
+  React.useEffect(async()=>{
+    await peticionGet();
+  },[])
+
+
+  return ( 
 
   <div class="col-lg-10 col-md-9 col-12 body_block  align-content-center">
     <div className="portfolio gutters grid img-container align-content-center" >
@@ -27,7 +28,7 @@ const TablaCompras = () => {
             <form action="/Agregar_compras" >
                 <button type="submit" className="btn btn-primary">Agregar</button>
             </form>
-            <label>"                    "</label>
+
             <form action="/ModCompra" >
                 <button type="submit" className="btn btn-primary">Modificar</button>
             </form>
@@ -38,7 +39,7 @@ const TablaCompras = () => {
           <table className="table table-hover text-light">
           <thead>
           <tr>
-          <th scope="col">Id_compra</th>
+          <th scope="col">Codigo de compra</th>
           <th scope="col">Placa</th>
           <th scope="col">Marca</th>
           <th scope="col">Vendedor</th>
@@ -49,16 +50,17 @@ const TablaCompras = () => {
           </thead>
           <tbody>
 
-          {equipo.map(compra => (
+          {data.map(compra => (
 
-          <tr key={ compra.pk }>
+          <tr key={ compra.Id_compra }>
+            
+            <td>{compra.Id_compra}</td>
             <td>{ compra.Placa }</td>
             <td>{ compra.Marca }</td>
             <td>{ compra.Vendedor }</td> 
             <td>{ compra.Comprador }</td>
             <td>{ compra.Fecha }</td>
             <td>{ compra.Precio }</td>
-            <td></td>
             
             </tr>
                    ))}

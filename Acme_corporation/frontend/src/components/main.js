@@ -40,7 +40,6 @@ const Main = () => {
 <div className="body-container container-fluid">
   <div className="row justify-content-center">
       <div className="col-lg-2 col-md-3 col-12 menu_block">
-
         <div className="side_menu_section">
           <NavMenu/>
         </div>       
