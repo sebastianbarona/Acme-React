@@ -36,6 +36,7 @@ const FormularioUsu = () => {
     await axios.post(baseUrl, usuario)
     .then(response=>{
       setData(data.concat(response.data))
+      alert("Usuario Creado")
     })
   }
 
@@ -96,7 +97,7 @@ const FormularioUsu = () => {
             <div className="input-group-prepend">
                 <label className="input-group-text" for="inputGroupSelect01">Rol Options</label>
             </div>
-            <select className="custom-select" onChange={handleChange} name="Rol_usuario" value=""  id="inputGroupSelect01">
+            <select className="custom-select" onChange={handleChange} name="Rol_usuario" id="inputGroupSelect01">
                 <option selected>Rol...</option>
                 <option placeholder="Admin" value="Admin">Admin</option>
                 <option placeholder="Empleado" value="Empleado">Empleado</option>

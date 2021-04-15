@@ -727,6 +727,15 @@ img {
   -webkit-transition: all ease-in-out 0.4s;
   transition: all ease-in-out 0.4s;
 }
+
+.project_box_two{
+  position: relative;
+  height: auto;
+  margin:  auto;
+  -webkit-transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.4s;
+}
+
 .project_box_one img {
   display: block;
   width: 100%;
@@ -905,11 +914,7 @@ img {
 }
 
 /*___________________________________________________________ */
-.login-page {
-  width: 100%;
-  padding: 8% 0 0;
-  margin: auto;
-}
+
 .form {
   position: relative;
   z-index: 1;
@@ -917,9 +922,10 @@ img {
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -930,6 +936,7 @@ img {
   box-sizing: border-box;
   font-size: 14px;
   width: auto;
+  color: rgb(255, 255, 255);
  
 }
 .form button {

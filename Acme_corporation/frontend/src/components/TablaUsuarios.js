@@ -25,11 +25,11 @@ const TablaUsuarios = () => {
     <div className="portfolio gutters grid img-container align-content-center" >
       <div className="mt75 row justify-content-center">
         <div className="input-group mb-3">
-          <form action="/Agregar_usuarios" method="GET">
+          <form action="/Agregar_usuarios" >
            <button type="submit" className="btn btn-primary">Agregar</button>
            </form>
 
-           <form action="/ModUsuario" method="GET">
+           <form action="/ModUsuario" >
            <button type="submit" className="btn btn-primary">Modificar</button>
            </form>
         </div>
@@ -52,7 +52,7 @@ const TablaUsuarios = () => {
 
         {data.map(usuario => (
 
-          <tr key={ usuario.pk }>
+          <tr key={ usuario.Username }>
             <td>{ usuario.Username }</td>
             <td>{ usuario.Email }</td>
             <td>{ usuario.Nombres }</td>

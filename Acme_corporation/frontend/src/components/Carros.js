@@ -1,12 +1,44 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {GridList,GridListTile} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import {GridList} from '@material-ui/core';
+import {Modal, Button, TextField,Select} from '@material-ui/core';
 
 const baseUrl = 'http://127.0.0.1:8000/carros/'
+const baseUrl2 = 'http://127.0.0.1:8000/marcas/'
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    position:'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+  },
+  iconos:{
+    cursor: 'pointer'
+  }, 
+  inputMaterial:{
+    width: '100%'
+  }
+}));
+
 
 const Carros = () => {
 
+  const styles= useStyles();
+
   const [data, setData]=useState([]);
+  const [carro,setresultadocarro]=useState([]);
+  const [modalBusqueda, setModalBusqueda]=useState(false);
+
+  const [busqueda,setCarroBuscado]=useState({
+    Placa: ''
+});
 
   const peticionGet=async()=>{
     await axios.get (baseUrl)
@@ -15,23 +47,84 @@ const Carros = () => {
     })
   }
 
+  const peticionGetmarcas=async()=>{
+    await axios.get (baseUrl2)
+    .then(response=>{
+      setData(response.data.data);
+    })
+  }
+
+  const handleChange=e=>{
+    const {name, value}=e.target;
+    setCarroBuscado(prevState=>({
+      ...prevState,
+      [name]: value
+    }))
+    console.log(busqueda);
+  }
+
+  const peticionShow=async()=>{
+    await axios.get (baseUrl+busqueda.Placa,busqueda)
+    .then(response=>{
+      setresultadocarro(response.data);
+    })
+  }
+
+  console.log(carro)
+
+  const abrirCerrarModalBusqueda=()=>{
+    setModalBusqueda(!modalBusqueda);
+  }
+
+
   React.useEffect(async()=>{
     await peticionGet();
   },[])
+
+  React.useEffect(async()=>{
+    await peticionGetmarcas();
+  },[])
+
+  const bodyConsulta=(
+    <div className={styles.modal}>
+      <h3>Resultado Busqueda</h3>
+      <TextField name="Marca" className={styles.inputMaterial} label="Marca" onChange={handleChange} value={busqueda.Username}/>
+      <br />
+      <TextField name="Placa" className={styles.inputMaterial} label="Placa" onChange={handleChange} value={busqueda.Email}/>
+      <br />
+      <TextField name="Modelo" className={styles.inputMaterial} label="Modelo" onChange={handleChange} value={busqueda.Modelo}/>
+      <br />
+      <TextField name="Dueño" className={styles.inputMaterial} label="Dueño" onChange={handleChange} value={busqueda.Dueño}/>
+      <br />
+      <TextField type="date" name="Fechapublicacion" className={styles.inputMaterial} label="Fecha Publicacion" onChange={handleChange} value={busqueda.Fechapublicacion}/>
+      <br />
+      <TextField name="Precio" className={styles.inputMaterial} label="Precio" onChange={handleChange} value={busqueda.Precio}/>
+      <br />
+      <img src={busqueda.Imagen}  alt="pro1"/>
+      <TextField name="Imagen" className={styles.inputMaterial} label="Imagen" onChange={handleChange} value={busqueda.Imagen}/>
+      <br />
+      <TextField name="Estado_Carro" className={styles.inputMaterial} label="Estado Carro" onChange={handleChange} value={busqueda.Estado_Carro}/>
+      <br />  
+      <TextField name="Estado" className={styles.inputMaterial} label="Estado" onChange={handleChange} value={busqueda.Estado}/>
+      <br /><br />
+      <div align="right">
+      <Button onClick={()=>abrirCerrarModalBusqueda()}>Cancelar</Button>
+      </div>
+    </div>
+  )
+
 
     return ( 
 
   <div className="col-lg-10 col-md-9 col-12 body_block">
     <div>
       <div className="mt75 row justify-content-center">
-      <form action="/buscar/">
         <div className="input-group mb-3">
+            <input type="text" className="form-control" onChange={handleChange} name="Placa" placeholder="Placa"  aria-describedby="basic-addon1"></input>
             <div className="input-group-prepend">
-                <button className="btn btn-outline-secondary" type="button">Buscar Carro</button>
+                <button className="btn btn-outline-secondary" onClick={()=>peticionShow()} type="button">Buscar Carro</button>
             </div>
-            <input type="text" className="form-control" placeholder="Marca"  aria-describedby="basic-addon1"></input>
         </div>
-      </form>
         
         <div className="input-group mb-3">
         <form action="/Agregar_carros" >
@@ -77,7 +170,12 @@ const Carros = () => {
                     )}
 </GridList>
 </div>
-    
+                     <Modal
+                     open={modalBusqueda}
+                     onClose={abrirCerrarModalBusqueda}>
+                        {bodyConsulta}
+                     </Modal>
+   
 </div>
 
 </div>

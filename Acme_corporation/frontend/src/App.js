@@ -17,10 +17,10 @@ function App() {
 <Switch>
 
 <Route  path="/Login" component={Login}/>
-<Route  path="/Home" component={Main} />   
-<Route  path="/" component={Main}/>
+<Route  path="/Home" component={Main}/>   
+<Route  path="/" component={Main}/> 
 
-   
+
 </Switch>
 </Router>
 

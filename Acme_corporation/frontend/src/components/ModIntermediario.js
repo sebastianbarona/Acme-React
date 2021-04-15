@@ -3,6 +3,8 @@ import axios from 'axios';
 import {makeStyles} from '@material-ui/core/styles';
 import {Modal, Button, TextField,Select} from '@material-ui/core';
 import {Delete } from '@material-ui/icons';
+import {GridList} from '@material-ui/core';
+
 
 const baseUrl = 'http://127.0.0.1:8000/intermediarios/'
 const baseunoUrl = 'http://127.0.0.1:8000/carros/'
@@ -202,20 +204,20 @@ const ModVenta = () => {
     
     return (
 
-<div className="col-md-6 col-7 content_section"> 
+<div className="col-lg-10 col-md-9 body_block"> 
     <div> 
         <h3> Modificar Intermediario </h3>
         <p> Bienvenido a Acme Corporation recuerde llenar muy bien los campos antes de Modificar un Intermediario </p>
         <br></br>
     </div>
-    <div className="row justify-content-center">
-        <div className="mt75 row justify-content-center">                                      
-            <div className="grid-item branding col-sm-3 col-md-3 col-lg-3">      
-                
+
+
+    <div className="grid-item branding ">
+            <GridList cellHeight={450} cols={4} >
             {
                 data.length > 0 ?    
                 data.map(intermediario => (
-    
+             <div className="project_box_two">
                 <div className="card ">
                     <div className="card-body">    
                         <h5 className="card-title"><strong>{ intermediario.Id_intermediario }</strong></h5>
@@ -243,9 +245,8 @@ const ModVenta = () => {
                      onClose={abrirCerrarModalEliminar}>
                         {bodyEliminar}
                      </Modal>
-                
+                     </div>
                 </div>
-
                 )):(
                     <div >
                     <center>  
@@ -253,12 +254,11 @@ const ModVenta = () => {
                     </center>
                     </div>
                         )}
-    
-            </div>
+              </GridList>         
+         
             <br></br>                            
         </div>
     </div>
-</div> 
                       
 );
 }

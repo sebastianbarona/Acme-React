@@ -4,23 +4,27 @@ import axios from 'axios';
 import{FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import{faCar,faUserFriends,faUser,faHome,faShoppingCart,faMoneyCheck,faBook} from '@fortawesome/free-solid-svg-icons'
 
-const baseUrl = 'http://127.0.0.1:8000/usuarios/'
+
+
+const UsuariosFiltrados = 'http://127.0.0.1:8000/usuarios/'
 
 const NavMenu = () => {
 
     const [data, setData]=useState([]);
 
     const peticionGet=async()=>{
-      await axios.get (baseUrl)
+      await axios.get (UsuariosFiltrados)
       .then(response=>{
         setData(response.data.data);
       })
     }
   
+    
+
     React.useEffect(async()=>{
       await peticionGet();
     },[])
-
+    
     return ( 
 
 <div className="side_menu_section animation-container animation-fade-down" data-animation-delay="300">        
@@ -39,7 +43,8 @@ const NavMenu = () => {
                     <li>
                         <a href="/Home">
                         <FontAwesomeIcon icon={faHome} style={{fontSize:"2em",color:"palegoldenrod"}}/>{""}
-                        <br></br> Home </a>
+                        <br></br> Home 
+                        </a>
                     
                     </li>
                 </NavLink>

@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {makeStyles} from '@material-ui/core/styles';
 import {Modal, Button, TextField,Select} from '@material-ui/core';
-import {Edit, Delete,} from '@material-ui/icons';
+import {Delete,} from '@material-ui/icons';
+import {GridList} from '@material-ui/core';
 
 const baseUrl = 'http://127.0.0.1:8000/carros/'
 const baseunoUrl = 'http://127.0.0.1:8000/marcas/'
@@ -168,20 +169,19 @@ const ModCarros = () => {
     
     return ( 
 
-<div className="col-md-6 col-7 content_section">
+<div className="col-lg-10 col-md-9 body_block">
     <div> 
         <h3> Modificar Carro </h3>
         <p> Bienvenido a Acme Corporation recuerde llenar muy bien los campos antes de Modificar un Carro </p>
         <br></br>
     </div>
-    <div className="row justify-content-center">
-        <div className="mt75 row justify-content-center">
-            <div className="grid-item branding col-sm-3 col-md-3 col-lg-3"> 
                 
+            <div className="grid-item branding ">
+            <GridList cellHeight={530} cols={4} >
             {
                 data.length > 0 ?    
                 data.map(carro => (
-    
+              <div className="project_box_two" > 
                 <div className="card ">
                     <img className="card-img-top" src={ carro.Imagen }></img>
                     <div className="card-body">    
@@ -208,6 +208,7 @@ const ModCarros = () => {
                      onClose={abrirCerrarModalEliminar}>
                         {bodyEliminar}
                      </Modal>
+                     </div>
                 </div>
                   )):(
                     <div >
@@ -218,10 +219,10 @@ const ModCarros = () => {
                         )
         }
           
+          </GridList>
             </div>
         </div>
-    </div>              
-</div>
+    
            
       );
     }
