@@ -34,6 +34,7 @@ const Carros = () => {
 
   const [data, setData]=useState([]);
   const [carro,setresultadocarro]=useState([]);
+  const [marcas,setmarcas]=useState([]);
   const [modalBusqueda, setModalBusqueda]=useState(false);
 
   const [busqueda,setCarroBuscado]=useState({
@@ -50,7 +51,7 @@ const Carros = () => {
   const peticionGetmarcas=async()=>{
     await axios.get (baseUrl2)
     .then(response=>{
-      setData(response.data.data);
+      setmarcas(response.data.data);
     })
   }
 
