@@ -67,11 +67,9 @@ const FormularioVenta = () => {
       await axios.post(baseUrl, venta)
       .then(response=>{
         setData(data.concat(response.data))
-      }).catch(error =>{
-            console.log(error.response.data)
-            return alert(error.response.data);
-      });
-
+        alert("Venta Creada")
+      
+    })
     }
 
     React.useEffect(async()=>{

@@ -7,7 +7,6 @@ const basetresUrl = 'http://127.0.0.1:8000/personas/'
 const basecuatroUrl = 'http://127.0.0.1:8000/usuarios/'
 
 
-
 const FormularioCompra = () => {
    
         const [data, setData]=useState([]);
@@ -66,11 +65,8 @@ const FormularioCompra = () => {
           await axios.post(baseUrl, compra)
           .then(response=>{
             setData(data.concat(response.data))
-          }).catch(error =>{
-                console.log(error.response.data)
-                return alert(error.response.data);
+            alert("Compra Creada")
           });
-    
         }
     
         React.useEffect(async()=>{

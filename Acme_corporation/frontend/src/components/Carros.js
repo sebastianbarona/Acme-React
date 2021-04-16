@@ -37,9 +37,9 @@ const Carros = () => {
   const [marcas,setmarcas]=useState([]);
   const [modalBusqueda, setModalBusqueda]=useState(false);
 
-  const [busqueda,setCarroBuscado]=useState({
-    Placa: ''
-});
+  const [busqueda,setCarroBuscado]=useState({  
+    Placa: '',
+  });
 
   const peticionGet=async()=>{
     await axios.get (baseUrl)
@@ -68,6 +68,7 @@ const Carros = () => {
     await axios.get (baseUrl+busqueda.Placa,busqueda)
     .then(response=>{
       setresultadocarro(response.data);
+      abrirCerrarModalBusqueda()
     })
   }
 
@@ -89,24 +90,29 @@ const Carros = () => {
   const bodyConsulta=(
     <div className={styles.modal}>
       <h3>Resultado Busqueda</h3>
-      <TextField name="Marca" className={styles.inputMaterial} label="Marca" onChange={handleChange} value={busqueda.Username}/>
+      <img src={carro.Imagen}  alt="pro1"/>
+      <br/>
+      <br/>
+      <select className="custom-select" onChange={handleChange} name="Marca" value={carro.Marca}>
+          <option></option> 
+              {marcas.map(elemento=>(
+          <option key={elemento.Id_Marca} value={elemento.Id_Marca}>{elemento.Nombre}</option> 
+              ))}
+         </select>
       <br />
-      <TextField name="Placa" className={styles.inputMaterial} label="Placa" onChange={handleChange} value={busqueda.Email}/>
+      <TextField name="Placa" className={styles.inputMaterial} label="Placa" onChange={handleChange} value={carro.Placa}/>
       <br />
-      <TextField name="Modelo" className={styles.inputMaterial} label="Modelo" onChange={handleChange} value={busqueda.Modelo}/>
+      <TextField name="Modelo" className={styles.inputMaterial} label="Modelo" onChange={handleChange} value={carro.Modelo}/>
       <br />
-      <TextField name="Dueño" className={styles.inputMaterial} label="Dueño" onChange={handleChange} value={busqueda.Dueño}/>
+      <TextField name="Dueño" className={styles.inputMaterial} label="Dueño" onChange={handleChange} value={carro.Dueño}/>
       <br />
-      <TextField type="date" name="Fechapublicacion" className={styles.inputMaterial} label="Fecha Publicacion" onChange={handleChange} value={busqueda.Fechapublicacion}/>
+      <TextField type="date" name="Fechapublicacion" className={styles.inputMaterial} label="Fecha Publicacion" onChange={handleChange} value={carro.Fechapublicacion}/>
       <br />
-      <TextField name="Precio" className={styles.inputMaterial} label="Precio" onChange={handleChange} value={busqueda.Precio}/>
+      <TextField name="Precio" className={styles.inputMaterial} label="Precio" onChange={handleChange} value={carro.Precio}/>
       <br />
-      <img src={busqueda.Imagen}  alt="pro1"/>
-      <TextField name="Imagen" className={styles.inputMaterial} label="Imagen" onChange={handleChange} value={busqueda.Imagen}/>
-      <br />
-      <TextField name="Estado_Carro" className={styles.inputMaterial} label="Estado Carro" onChange={handleChange} value={busqueda.Estado_Carro}/>
+      <TextField name="Estado_Carro" className={styles.inputMaterial} label="Estado Carro" onChange={handleChange} value={carro.Estado_Carro}/>
       <br />  
-      <TextField name="Estado" className={styles.inputMaterial} label="Estado" onChange={handleChange} value={busqueda.Estado}/>
+      <TextField name="Estado" className={styles.inputMaterial} label="Estado" onChange={handleChange} value={carro.Estado}/>
       <br /><br />
       <div align="right">
       <Button onClick={()=>abrirCerrarModalBusqueda()}>Cancelar</Button>

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import{FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import{faCar,faUserFriends,faUser,faHome,faShoppingCart,faMoneyCheck,faBook} from '@fortawesome/free-solid-svg-icons'
-
+import Login from './Login';
 
 
 const UsuariosFiltrados = 'http://127.0.0.1:8000/usuarios/'
@@ -12,20 +12,38 @@ const NavMenu = () => {
 
     const [data, setData]=useState([]);
 
+    const [usuario, setUsuarioSeleccionado]=useState({
+        Username: '',
+        Password: '',
+  
+      })
+    console.log(usuario.Username)
+
     const peticionGet=async()=>{
       await axios.get (UsuariosFiltrados)
       .then(response=>{
         setData(response.data.data);
       })
     }
-  
-    
+
+    const handleChange=e=>{
+        const {name, value}=e.target;
+        setUsuarioSeleccionado(prevState=>({
+          ...prevState,
+          [name]: value
+        }))
+        console.log(usuario);
+      }
+
+
 
     React.useEffect(async()=>{
       await peticionGet();
     },[])
+
     
     return ( 
+
 
 <div className="side_menu_section animation-container animation-fade-down" data-animation-delay="300">        
   <center>

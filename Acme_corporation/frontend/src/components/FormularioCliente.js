@@ -28,6 +28,8 @@ const Formulario = () => {
     await axios.post(baseUrl, persona)
     .then(response=>{
       setData(data.concat(response.data))
+      alert("Cliente Creado")
+    
     })
   }
 

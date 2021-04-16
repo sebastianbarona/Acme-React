@@ -4,13 +4,10 @@ import axios from 'axios';
 const baseUrl = 'http://127.0.0.1:8000/usuarios/'
 
 const Login = () => {
-
     const [data, setData]=useState([]);
-    
     const [usuario, setUsuarioSeleccionado]=useState({
       Username: '',
       Password: '',
-
     })
 
     const peticionGet=async()=>{
@@ -22,14 +19,19 @@ const Login = () => {
   
     const peticionverificar=async()=>{
         var dataNueva=data;
-        var verificador=false
-
+        var verificador=false;
+        var User ='';
+        var Contraseña = '';
+     
         dataNueva.map(consola=>{
           if (usuario.Username == consola.Username && usuario.Password === consola.Password){
             verificador=true
             }})
           if(verificador===true){
+            User = usuario.Username
+            Contraseña = usuario.Password
             window.location = '/home';
+            
             }else{
                 alert("Usuario o Contraseña Incorrecta")
               }}

@@ -65,9 +65,9 @@ const FormularioIntermediario = () => {
       await axios.post(baseUrl, intermediada)
       .then(response=>{
         setData(data.concat(response.data))
-      }).catch(error =>{
-            return alert(error.response.data);
-      });
+        alert("Venta Intermediada Creada")
+      
+    })
     }
 
     React.useEffect(async()=>{
