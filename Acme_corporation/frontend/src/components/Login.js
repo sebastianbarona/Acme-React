@@ -10,14 +10,14 @@ const Login = () => {
       Password: '',
     })
 
-    const peticionGet=async()=>{
+  const peticionGet=async()=>{
       await axios.get (baseUrl)
       .then(response=>{
         setData(response.data.data);
       })
     }
   
-    const peticionverificar=async()=>{
+  const peticionverificar=async()=>{
         var dataNueva=data;
         var verificador=false;
         var User ='';
@@ -31,16 +31,15 @@ const Login = () => {
             User = usuario.Username
             Contraseña = usuario.Password
             window.location = '/home';
-            
             }else{
                 alert("Usuario o Contraseña Incorrecta")
               }}
 
-    React.useEffect(async()=>{
+  React.useEffect(async()=>{
       await peticionGet();
     },[])
 
-    const handleChange=e=>{
+  const handleChange=e=>{
       const {name, value}=e.target;
       setUsuarioSeleccionado(prevState=>({
         ...prevState,
@@ -49,7 +48,7 @@ const Login = () => {
       console.log(usuario);
     }
 
-    return ( 
+  return ( 
 
 <body className="body2">
         <div className="login-page justify-content-center">
@@ -61,7 +60,7 @@ const Login = () => {
                 </div>
                 <div className="form-group">
                     <label for="exampleInputPassword1" className="text-light" >Password</label>
-                    <input type="text" className="form-control" onChange={handleChange} name="Password" placeholder="Password"></input>
+                    <input type="password" className="form-control" onChange={handleChange} name="Password" placeholder="Password"></input>
                 </div>
                 <div className="form-check">
                     <input type="checkbox" className="form-check-input" ></input>
